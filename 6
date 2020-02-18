@@ -1,0 +1,14 @@
+
+from sqlalchemy import create_engine
+import pandas as pd
+
+engine = create_engine("mysql+pymysql://newuser:password@localhost/examen")
+
+def importexcel(link, table):
+    print("Lecture des données")
+    df = pd.read_excel(link , skiprows=1,header=0)
+    df.to_sql('elus_mun2014', con = engine, if_exists='append', index = False)
+    return print("fin")
+
+importexcel('/Users/yoannlucido/Desktop/examen/elus_mun2014.xlsx', 
+            'elus_mun2014')
